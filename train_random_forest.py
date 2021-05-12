@@ -11,13 +11,15 @@ from utils.preprocess import preprocess
 
 DATA_PATH = './dataset/train.tsv'
 SAVE_PATH = './models/'
+TEST_SIZE = 0.3
+RANDOM_STATE = 123
 
 
 def train(df):
     train_X = df.drop('survived', axis=1)
     train_y = df.survived
     train_X, test_X, train_y, test_y = train_test_split(
-        train_X, train_y, test_size=0.3, random_state=666)
+        train_X, train_y, test_size=TEST_SIZE, random_state=RANDOM_STATE)
 
     model = RandomForestClassifier(random_state=0)
     model = model.fit(train_X, train_y)
